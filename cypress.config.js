@@ -2,12 +2,13 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
+    experimentalStudio: true,
     // URL base para pruebas E2E
-    baseUrl: 'https://www.saucedemo.com/',
+    baseUrl: 'https://www.demoblaze.com/',
     
     // Configuración de specs
-    specPattern: 'cypress/**/*.cy.{js,jsx,ts,tsx}',
-    supportFile: 'cypress/support/e2e.js',
+    specPattern: 'cypress/e2e/**/*.cy.ts',
+    supportFile: 'cypress/support/e2e.ts',
     
     // Configuración de viewports
     viewportWidth: 1280,
@@ -31,7 +32,14 @@ module.exports = defineConfig({
     videosFolder: 'cypress/videos',
     
     // reportes
-    reporter: 'spec',
+    reporter: 'mochawesome',
+    reporterOptions: {
+      reportDir: 'cypress/reports/mochawesome',
+      overwrite: false,
+      html: false,
+      json: true,
+      timestamp: 'mmddyyyy_HHMMss'
+    },
     
     setupNodeEvents(on, config) {
       return config;

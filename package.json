@@ -6,11 +6,16 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:run:e2e": "cypress run --spec 'cypress/e2e/ui/**/*.cy.js'",
-    "cy:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.js'",
+    "cy:run:e2e": "cypress run --spec 'cypress/e2e/ui/**/*.cy.ts'",
+    "cy:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.ts'",
     "cy:run:headed": "cypress run --headed",
     "cy:run:chrome": "cypress run --browser chrome",
-    "cy:run:firefox": "cypress run --browser firefox"
+    "cy:run:firefox": "cypress run --browser firefox",
+    "test": "cypress run",
+    "report:clean": "rmdir /s /q cypress\\reports 2>nul || true",
+    "report:merge": "mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/combined.json",
+    "report:generate": "marge cypress/reports/combined.json -f report -o cypress/reports",
+    "test:report": "npm run report:clean && npm run test && npm run report:merge && npm run report:generate"
   },
   "keywords": [
     "cypress",
@@ -22,6 +27,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.6.0"
+    "@types/node": "^25.3.0",
+    "cypress": "^13.6.0",
+    "cypress-plugin-steps": "^1.2.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^4.4.1",
+    "mochawesome-report-generator": "^6.3.2",
+    "typescript": "^5.9.3"
   }
 }
