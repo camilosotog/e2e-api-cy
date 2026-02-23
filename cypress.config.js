@@ -12,6 +12,9 @@ module.exports = defineConfig({
       PRODUCTS_CSV_PATH: process.env.PRODUCTS_CSV_PATH,
       BILLS_CSV_PATH: process.env.BILLS_CSV_PATH,
       USERS_CSV_PATH: process.env.USERS_CSV_PATH,
+      DEMOBLAZE_API_URL: process.env.DEMOBLAZE_API_URL,
+      DEFAULT_USERNAME: process.env.DEFAULT_USERNAME,
+      DEFAULT_PASSWORD: process.env.DEFAULT_PASSWORD,
     },
     
     // Configuración de specs
