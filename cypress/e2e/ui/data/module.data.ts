@@ -1,9 +1,9 @@
-import { Module } from "../interfaces/module.interface";
+import { Module } from '../interfaces/module.interface';
 
 export const homeModule: Module = {
-    name: "Home (current)"
+    name: 'Home (current)'
 }
 
 export const cartModule: Module = {
-    name: "Cart"
+    name: 'Cart'
 }
