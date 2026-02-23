@@ -1,0 +1,74 @@
+--------------------------------------------------------------------------------
+                    CONCLUSIONES - PRUEBAS UI (E2E)
+--------------------------------------------------------------------------------
+
+Se implementaron 4 escenarios de prueba para el flujo de compra:
+
+1. Flujo de compra completo (2 productos)
+2. DATA-DRIVEN: Iteración sobre datos de facturación (múltiples clientes)
+3. DATA-DRIVEN: Iteración sobre productos
+4. DATA-DRIVEN: productos y compras aleatorias
+
+--------------------------------------------------------------------------------
+HALLAZGOS
+--------------------------------------------------------------------------------
+
+1. ESTABILIDAD DE LA APLICACIÓN:
+   - La aplicación presenta tiempos de carga variables
+   - El carrito puede tardar en actualizarse después de agregar productos
+   - Se requiere el uso de interceptoress para sincronización confiable
+
+2. FLUJO DE COMPRA:
+   - El flujo de agregar productos al carrito funciona correctamente
+   - El formulario de compra acepta cualquier dato (sin validaciones)
+   - No hay validación de tarjeta de crédito real
+   - El modal de confirmación se muestra tras completar la compra
+
+3. NAVEGACIÓN:
+   - La navegación entre módulos (Home, Cart) funciona correctamente
+   - Los productos se muestran dinámicamente desde un backend
+   - El carrito persiste los productos agregados durante la sesión
+
+4. DATA-DRIVEN TESTING:
+   - Permite ejecutar múltiples escenarios con diferentes datos
+
+5. INTERCEPTACIÓN DE REQUESTS:
+   - El endpoint /addtocart confirma que los productos se agregan
+
+--------------------------------------------------------------------------------
+CONCLUSIONES
+--------------------------------------------------------------------------------
+
+1. El patrón Page Object Model (POM) implementado mejora la mantenibilidad:
+   - buy.page.ts encapsula las acciones de compra
+   - login.page.ts maneja la autenticación
+   - Los cambios en la UI se aíslan en un solo lugar
+
+2. El enfoque Data-Driven es efectivo para este tipo de pruebas:
+   - Los datos en CSV permiten agregar casos sin modificar código
+   - Facilita la colaboración con equipos no técnicos
+   - Mejora la cobertura con mínimo esfuerzo
+
+3. La arquitectura del proyecto es escalable:
+   - Separación clara: data, helpers, interfaces, pages, tests
+   - TypeScript proporciona tipado y autocompletado
+   - Fácil de extender para nuevos módulos
+
+4. Recomendaciones para la aplicación bajo prueba:
+   - Agregar validaciones en el formulario de compra
+   - Implementar validación de tarjeta de crédito
+   - Mejorar feedback al usuario durante carga de productos
+
+--------------------------------------------------------------------------------
+TECNOLOGÍAS Y PATRONES UTILIZADOS
+--------------------------------------------------------------------------------
+
+- Cypress
+- TypeScript
+- Page Object Model (POM) para organización
+- Data-Driven Pruebas con archivos CSV
+- cy.intercept() para interceptación de requests
+- Variables de entorno para configuración dinámica
+- Mochawesome para reportes
+
+--------------------------------------------------------------------------------

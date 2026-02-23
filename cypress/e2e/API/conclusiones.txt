@@ -1,0 +1,63 @@
+                    CONCLUSIONES - PRUEBAS API
+--------------------------------------------------------------------------------
+
+Se implementaron 4 casos de prueba para los endpoints de autenticación:
+
+1. Crear un nuevo usuario en signup
+2. Intentar crear un usuario ya existente
+3. Usuario y password correcto en login
+4. Usuario y password incorrecto en login
+
+--------------------------------------------------------------------------------
+HALLAZGOS
+--------------------------------------------------------------------------------
+
+1. ENDPOINT SIGNUP:
+   - El endpoint devuelve status 200 tanto para éxito como para error
+   - Cuando el usuario se crea correctamente, el body response viene vacío
+   - Cuando el usuario ya existe, devuelve errorMessage como parametro en el body response
+   - No utiliza códigos HTTP estándar para indicar errores (401, 409, etc)
+
+2. ENDPOINT LOGIN:
+   - También devuelve status 200 para todos los casos
+   - Login exitoso retorna un token con formato "Auth_token: <token>"
+   - Login fallido retorna errorMessage indicando una cadena "Wrong password."
+   - No hay diferencia en status entre credenciales válidas e inválidas
+
+3. TIEMPOS DE RESPUESTA:
+   - Todas las respuestas se mantienen por debajo de 2 segundos
+   - La API tiene un rendimiento aceptable para los endpoints probados
+
+4. MANEJO DE ERRORES:
+   - La API no sigue estándares REST para códigos de error HTTP
+   - Los errores se comunican mediante el parametro errorMessage en el body response
+
+--------------------------------------------------------------------------------
+CONCLUSIONES
+--------------------------------------------------------------------------------
+
+1. La API de Demoblaze funciona correctamente para operaciones básicas de
+   autenticación (registro y login).
+
+2. El diseño de la API no sigue las mejores practicas REST:
+   - Retorna 200 OK incluso para acciones fallidas
+   - No utiliza códigos HTTP estandares (401, 409, etc.)
+
+3. Las pruebas automatizadas deben validar tanto el status code como el
+   contenido del body para determinar el resultado real de la operación.
+
+4. Se recomienda mejorar el diseño de la API para usar códigos HTTP apropiados:
+   - 201 Created  - para signup exitoso
+   - 409 Conflict - para usuario existente
+   - 401 Unauthorized  -para credenciales incorrectas
+
+--------------------------------------------------------------------------------
+TECNOLOGÍAS UTILIZADAS
+--------------------------------------------------------------------------------
+
+- Cypress
+- TypeScript
+- Patrón de arquitectura con helpers, interfaces y data separados
+- Variables de entorno para configuración
+
+--------------------------------------------------------------------------------
