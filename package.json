@@ -7,7 +7,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:e2e": "cypress run --spec 'cypress/e2e/ui/**/*.cy.ts'",
-    "cy:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.ts'",
+    "cy:run:api": "cypress run --spec 'cypress/e2e/API/**/*.cy.ts'",
     "cy:run:headed": "cypress run --headed",
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
