@@ -158,4 +158,40 @@ describe('Validacion de funciones de compra en demoblaze', () => {
 
         cy.log('Todos los productos del CSV add al carrito');
     });
+
+    it('DATA-DRIVEN: productos y compras aleatorias', () => {
+        expect(productsData, 'productos disponibles').to.have.length.greaterThan(0);
+        expect(billsData, 'facturaciones disponibles').to.have.length.greaterThan(0);
+
+        const randomProductIndex = Math.floor(Math.random() * productsData.length);
+        const randomBillIndex = Math.floor(Math.random() * billsData.length);
+        const randomProduct = productsData[randomProductIndex];
+        const randomBill = billsData[randomBillIndex];
+
+        cy.log(`Producto aleatorio: [${randomProductIndex}] ${randomProduct.name}`);
+        cy.log(`Perfil aleatorio: [${randomBillIndex}] ${randomBill.name}`);
+
+        cy.intercept('POST', '**/addtocart').as('addRandomProduct');
+        buyPage.addToCart({
+            name: randomProduct.name,
+            price: randomProduct.price,
+        });
+        cy.wait('@addRandomProduct').its('response.statusCode').should('eq', 200);
+
+        buyPage.goToModule(cartModule.name);
+        cy.contains('h2', 'Products').should('be.visible');
+        cy.contains('td', randomProduct.name).should('be.visible');
+
+        buyPage.fillPurchaseForm({
+            name: randomBill.name,
+            country: randomBill.country,
+            city: randomBill.city,
+            creditCard: randomBill.creditCard,
+            month: randomBill.month,
+            year: randomBill.year,
+        });
+
+        cy.contains('button', 'Purchase').click();
+        cy.contains('h2', 'Thank you for your purchase!').should('be.visible');
+    });
 });
