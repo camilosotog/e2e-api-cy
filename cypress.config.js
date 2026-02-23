@@ -1,10 +1,18 @@
 const { defineConfig } = require('cypress');
+require('dotenv').config();
 
 module.exports = defineConfig({
   e2e: {
     experimentalStudio: true,
     // URL base para pruebas E2E
     baseUrl: 'https://www.demoblaze.com/',
+    
+    // Variables de entorno desde .env
+    env: {
+      PRODUCTS_CSV_PATH: process.env.PRODUCTS_CSV_PATH,
+      BILLS_CSV_PATH: process.env.BILLS_CSV_PATH,
+      USERS_CSV_PATH: process.env.USERS_CSV_PATH,
+    },
     
     // Configuración de specs
     specPattern: 'cypress/e2e/**/*.cy.ts',
